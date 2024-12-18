@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class To_Do_List {
+public class Main {
     public static HashMap<Integer, String> kategoriHash = new HashMap<Integer, String>();
     public static int a = 4;
 
@@ -133,5 +134,116 @@ public class To_Do_List {
         int kategorigoruntuleme = scanner.nextInt();
 
     }
+
+}
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class main {
+
+    public static void main(String[] args) {
+        System.out.println("TO-DO-LIST");
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> gorevler = new ArrayList<>();
+        ArrayList<String> copler = new ArrayList<>();
+
+
+        while (true) {
+            Giris();
+
+
+            int tercih = scanner.nextInt();
+
+
+            switch (tercih) {
+                case 1:
+                    GorevEkleme(scanner,gorevler);
+                    break;
+                case 2:
+                    GorevSilme(scanner,gorevler,copler);
+                    break;
+                case 3:
+                    GorevGoruntuleme(gorevler);
+                    break;
+                case 4:
+                    CopKutusu(copler);
+                    break;
+                case 5:
+                    GorevGeriGetirme(scanner,copler,gorevler);
+                    break;
+                default:
+                    System.out.println("Gecersiz bir deger girdiniz.1,2,3,4 veya 5 değerini giriniz.");
+
+
+
+            }
+        }
+    }
+
+    public static void Giris(){
+        System.out.println("Görev eklemek için 1'e basınız.");
+        System.out.println("Gorev silmek için 2'ye basınız.");
+        System.out.println("Görevleri goruntulemek icin 3'e basiniz.");
+        System.out.println("Çöp kutusunu görüntülemek için 4'e basiniz.");
+        System.out.println("Çöp kutusundan bir görev çıkartmak için 5'e basınız.");
+    }
+    public static void GorevEkleme(Scanner scanner,ArrayList<String> gorevler){
+        System.out.println("Bir gorev ekleyiniz.");
+        scanner.nextLine();
+        gorevler.add(scanner.nextLine());
+    }
+    public static void GorevSilme(Scanner scanner,ArrayList<String> gorevler,ArrayList<String> copler){
+        System.out.println("Silmek istediğiniz görevi giriniz.");
+        if (gorevler.isEmpty()) {
+            System.out.println("Silinecek görev bulunmuyor.");
+        } else {
+            System.out.println("Silmek istediğiniz görevi seçiniz:");
+        }
+        for (int i = 0; i < gorevler.size(); i++) {
+            System.out.println((i) + ". " + gorevler.get(i));
+        }
+        int index = scanner.nextInt();
+        if (index >= 0 && index < gorevler.size()) {
+            String silinenGorev = gorevler.remove(index);
+            copler.add(silinenGorev);
+            System.out.println("Görev çöpe atıldı");
+        }
+
+    }
+
+    public static void GorevGoruntuleme(ArrayList<String> gorevler){
+        System.out.println("GÖREVLER:");
+        System.out.println(gorevler);
+    }
+    public static void CopKutusu( ArrayList<String> copler){
+        if (copler.isEmpty()) {
+            System.out.println("Çöp kutusu boş.");
+        } else {
+            System.out.println("ÇÖP KUTUSU:");
+            System.out.println(copler);
+        }
+
+
+    }
+    public static void GorevGeriGetirme(Scanner scanner,ArrayList<String> copler,ArrayList<String> gorevler){
+        if (copler.isEmpty()) {
+            System.out.println("Çöp kutusu boş.");
+        } else {
+            System.out.println("Çöp kutusundan çıkarmak istediğiniz görevi yazınız");
+        } for (int i = 0; i < copler.size(); i++) {
+            System.out.println((i) + ". " + copler.get(i));
+            int index2 = scanner.nextInt();
+            if (index2 >= 0 && index2 < copler.size()) {
+                String geriGetirilenGorev = copler.remove(index2);
+                gorevler.add(geriGetirilenGorev);
+                System.out.println("Görev çöpten çıkarıldı");
+            }
+        }
+
+    }
+
+
 
 }
