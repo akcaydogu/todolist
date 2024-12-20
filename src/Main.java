@@ -18,8 +18,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         HashMap<Integer, ArrayList<String>> gorevlerHashMap = new HashMap<>();
         HashMap<Integer, ArrayList<String>> coplerHashMap = new HashMap<>();
-        ArrayList<String> gorevler = new ArrayList<>();
-        ArrayList<String> copler = new ArrayList<>();
+//        ArrayList<String> gorevler = new ArrayList<>(); Aylin
+//        ArrayList<String> copler = new ArrayList<>(); Aylin
         categoryList.add("İş");
         categoryList.add("Okul");
         categoryList.add("Günlük Yaşam");
@@ -119,12 +119,26 @@ public class Main {
         System.out.printf("%s %-30s %-10s %-10s %n", "N", "Görev", "Kategori", "Yapılma durumu");
         if (gorevlerHashMap.isEmpty()) {
             System.out.printf("%s%n", "Boş");
-        }
-        for (Integer x : gorevlerHashMap.keySet()) {
-            String gorevName = gorevlerHashMap.get(x).get(0);
-            String category = gorevlerHashMap.get(x).get(1);
-            String isDone = gorevlerHashMap.get(x).get(2);
-            System.out.printf("%d %-30s %-10s %-10s %n", x, gorevName, category, isDone);
+        } else {
+            for (Integer x : gorevlerHashMap.keySet()) {
+                String gorevName = gorevlerHashMap.get(x).get(0);
+                String category = gorevlerHashMap.get(x).get(1);
+                String isDone = gorevlerHashMap.get(x).get(2);
+                System.out.printf("%d %-30s %-10s %-10s %n", x, gorevName, category, isDone);
+            }
+            System.out.println("Görev durumu belirlemek için 1'i tuşlayınız");
+            System.out.println("Geri dönmek için 0'yi tuşlayınız");
+            Scanner sc = new Scanner(System.in);
+            Integer choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Seçtiğiniz görevin numarasını giriniz.");
+                    Integer gorevNumber = sc.nextInt();
+                    signAsComplete(gorevNumber, gorevlerHashMap);
+                    break;
+                case 0:
+                    break;
+            }
         }
 
     }
@@ -154,7 +168,7 @@ public class Main {
 //            System.out.println((i) + ". " + copler.get(i));
 //            int index2 = scanner.nextInt();
 //            if (index2 >= 0 && index2 < copler.size()) {
-//                String geriGetirilenGorev = copler.remove(index2);
+//                String geriGetirilenGorev = copler.remove(index2);   Aylin
 //                gorevler.add(geriGetirilenGorev);
 //                System.out.println("Görev çöpten çıkarıldı");
 //            }
@@ -178,10 +192,23 @@ public class Main {
 
     }
 
+    public static void signAsComplete(int id, HashMap<Integer, ArrayList<String>> gorevlerHashMap) {
+        System.out.println("Görevi yapıldı işaretlemek için 1 yapılmadı işaretlemek için 2'yi tuşlayınız");
+        Scanner sc = new Scanner(System.in);
+        Integer choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                gorevlerHashMap.get(id).set(2, "1");
+                break;
+            case 2:
+                gorevlerHashMap.get(id).set(2, "0");
+                break;
+        }
+    }
     public static void Kategori() {
 
 //        kategoriHash.put(1, "İş");
-//        kategoriHash.put(2, "Okul");
+//        kategoriHash.put(2, "Okul");  Mert
 //        kategoriHash.put(3, "Günlük Yaşam");
 
         Scanner scanner = new Scanner(System.in);
