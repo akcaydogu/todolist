@@ -126,11 +126,15 @@ public class Main {
                 String isDone = gorevlerHashMap.get(x).get(2);
                 System.out.printf("%d %-30s %-10s %-10s %n", x, gorevName, category, isDone);
             }
+            System.out.println("Kategori filtrelemek için 2'yi tuşlayınız");
             System.out.println("Görev durumu belirlemek için 1'i tuşlayınız");
             System.out.println("Geri dönmek için 0'yi tuşlayınız");
             Scanner sc = new Scanner(System.in);
             Integer choice = sc.nextInt();
             switch (choice) {
+                case 2:
+                    KategoriFiltreleme(gorevlerHashMap);
+                    break;
                 case 1:
                     System.out.println("Seçtiğiniz görevin numarasını giriniz.");
                     Integer gorevNumber = sc.nextInt();
@@ -315,11 +319,21 @@ public class Main {
         }
     }
 
-    public static void KategoriFiltreleme(String category) {
+    public static void KategoriFiltreleme(HashMap<Integer, ArrayList<String>> gorevlerHashMap) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hangi numarali kategorinin icerigini gormek istiyorsunuz ?");
         KategoriGoruntuleme();
         int kategorigoruntuleme = scanner.nextInt();
+        String selectedCategory = categoryList.get(kategorigoruntuleme);
+        System.out.printf("%s %-30s %-10s %-10s %n", "N", "Görev", "Kategori", "Yapılma durumu");
+        for (Integer i : gorevlerHashMap.keySet()) {
+            if (gorevlerHashMap.get(i).contains(selectedCategory)) {
+                String gorevName = gorevlerHashMap.get(i).get(0);
+                String category = gorevlerHashMap.get(i).get(1);
+                String isDone = gorevlerHashMap.get(i).get(2);
+                System.out.printf("%d %-30s %-10s %-10s %n", i, gorevName, category, isDone);
+            }
+        }
     }
 
 }
